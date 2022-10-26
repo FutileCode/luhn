@@ -30,7 +30,6 @@ func Valid(num string) (valid bool, reason string) {
 
 		// ensure it is an integer
 		integer, err := strconv.Atoi(string(trimmed[i]))
-		//fmt.Println(integer)
 		if err != nil {
 			return false, "Number contains non-integers"
 		}
@@ -61,7 +60,7 @@ func Valid(num string) (valid bool, reason string) {
 
 		}
 	}
-	fmt.Println(sum)
+
 	// check if sum is divisible by 10
 	if sum%10 == 0 {
 		return true, "Number is valid"

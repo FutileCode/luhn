@@ -6,15 +6,15 @@ import (
 	"strings"
 )
 
-// checks a cc number against the luhn algorithm
-func Valid(num string) bool {
+// Checks a cc number (string) against the luhn algorithm. Returns a bool for validity and string for reason
+func Valid(num string) (valid bool, reason string) {
 
 	// remove whitespace
 	trimmed := strings.ReplaceAll(num, " ", "")
 
 	// ensure valid length
 	if len(trimmed) <= 1 {
-		return false
+		return false, "Number is too short (<=1)"
 	}
 
 	var sum int
@@ -32,7 +32,7 @@ func Valid(num string) bool {
 		integer, err := strconv.Atoi(string(trimmed[i]))
 		//fmt.Println(integer)
 		if err != nil {
-			return false
+			return false, "Number contains non integers"
 		}
 
 		// add if even index (from right) and double for odd index, subtract 9 if doubled > 9
@@ -63,5 +63,5 @@ func Valid(num string) bool {
 	}
 	fmt.Println(sum)
 	// check if sum is divisible by 10
-	return sum%10 == 0
+	return sum%10 == 0, "Number is valid"
 }
